@@ -10,7 +10,7 @@ bot = telebot.TeleBot(TOKEN)
 RSS_SOURCES = {
     "python": "https://habr.com/ru/rss/hubs/python/articles/?fl=ru",
     "chatgpt": "https://habr.com/ru/rss/search/?q=chatgpt&order_by=relevance&target_type=posts&hl=ru&fl=ru",
-    "VK": "https://habr.com/ru/rss/companies/vk/articles/?fl=ru"
+    "vk": "https://habr.com/ru/rss/companies/vk/articles/?fl=ru"
 }
 
 def get_latest_articles(rss_url, limit=5):
