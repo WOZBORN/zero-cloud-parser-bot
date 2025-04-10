@@ -9,7 +9,8 @@ bot = telebot.TeleBot(TOKEN)
 # 📰 RSS-ссылки
 RSS_SOURCES = {
     "python": "https://habr.com/ru/rss/hubs/python/articles/?fl=ru",
-    "chatgpt": "https://habr.com/ru/rss/search/?q=chatgpt&order_by=relevance&target_type=posts&hl=ru&fl=ru"
+    "chatgpt": "https://habr.com/ru/rss/search/?q=chatgpt&order_by=relevance&target_type=posts&hl=ru&fl=ru",
+    "VK": "https://habr.com/ru/rss/companies/vk/articles/?fl=ru"
 }
 
 def get_latest_articles(rss_url, limit=5):
@@ -29,7 +30,8 @@ def send_welcome(message):
     markup = InlineKeyboardMarkup()
     markup.add(
         InlineKeyboardButton("🐍 Python", callback_data="news_python"),
-        InlineKeyboardButton("🤖 ChatGPT", callback_data="news_chatgpt")
+        InlineKeyboardButton("🤖 ChatGPT", callback_data="news_chatgpt"),
+        InlineKeyboardButton("💙 VK", callback_data="news_vk")
     )
     bot.send_message(
         message.chat.id,
@@ -43,7 +45,8 @@ def ask_topic(message):
     markup = InlineKeyboardMarkup()
     markup.add(
         InlineKeyboardButton("🐍 Python", callback_data="news_python"),
-        InlineKeyboardButton("🤖 ChatGPT", callback_data="news_chatgpt")
+        InlineKeyboardButton("🤖 ChatGPT", callback_data="news_chatgpt"),
+        InlineKeyboardButton("💙 VK", callback_data="news_vk")
     )
     bot.send_message(message.chat.id, "Выбери тему новостей:", reply_markup=markup)
 
