@@ -1,3 +1,5 @@
+import random
+
 import telebot
 import feedparser
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -33,6 +35,11 @@ def send_welcome(message):
         InlineKeyboardButton("🤖 ChatGPT", callback_data="news_chatgpt"),
         InlineKeyboardButton("💙 VK", callback_data="news_vk")
     )
+    if (random.randint(0, 1) == 0):
+        url = "https://cdn.mtdv.me/video/rick.mp4"
+    else:
+        url = "https://habr.com/ru/feed/"
+    markup.add(InlineKeyboardButton("📖 Хабр", url=url))
     bot.send_message(
         message.chat.id,
         "Привет! Я бот, который показывает свежие статьи с Habr.\nВыбери тему:",
