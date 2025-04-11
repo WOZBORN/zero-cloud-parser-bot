@@ -49,13 +49,20 @@ def send_welcome(message):
 # 💬 Команда /news
 @bot.message_handler(commands=['news'])
 def ask_topic(message):
-    markup = InlineKeyboardMarkup()
-    markup.add(
-        InlineKeyboardButton("🐍 Python", callback_data="news_python"),
-        InlineKeyboardButton("🤖 ChatGPT", callback_data="news_chatgpt"),
-        InlineKeyboardButton("💙 VK", callback_data="news_vk")
-    )
-    bot.send_message(message.chat.id, "Выбери тему новостей:", reply_markup=markup)
+    try:
+        markup = InlineKeyboardMarkup()
+        markup.add(
+            InlineKeyboardButton("🐍 Python", callback_data="news_python"),
+            InlineKeyboardButton("🤖 ChatGPT", callback_data="news_chatgpt"),
+            InlineKeyboardButton("💙 VK", callback_data="news_vk")
+        )
+        message_text = "какаой-то текст"
+        message_count = len(message_text)//4096
+        for i in range(message_count+1):
+            bot.send_message(message.chat.id, message_text[i*4096:(i+1)*4096], reply_markup=markup)
+    except:
+        bot.send_message(message.chat.id, "Произошла непредвиденная ошибка! Можете написать в поддержку @support")
+        # Залогировать ошибку
 
 # 🔘 Обработка выбора темы
 @bot.callback_query_handler(func=lambda call: call.data.startswith("news_"))
@@ -74,4 +81,4 @@ def handle_news_choice(call):
 # 🔁 Запуск бота
 if __name__ == "__main__":
     print("Бот запущен...")
-    bot.infinity_polling()
+    bot.infinity_poling()
